@@ -1,4 +1,4 @@
-package com.project.driverfactory;
+package com.Job Creation Setup_01.driverfactory;
 
 import io.cucumber.java.After;
 import io.cucumber.java.Scenario;
@@ -24,7 +24,7 @@ import java.util.Date;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
-import com.project.utils.CommonUtils;
+import com.Job Creation Setup_01.utils.CommonUtils;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.safari.SafariDriver;
 
