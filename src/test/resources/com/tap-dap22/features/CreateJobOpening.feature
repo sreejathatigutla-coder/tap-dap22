@@ -679,3 +679,327 @@ Scenario Outline: Create Job Opening
     Examples:
       | job_role    | location    | minimum_experience | maximum_experience | qualification | short_job_description | responsibilities   |
       | Developer   | New York    | 1                  | 2                  | Bachelor's     | Short description     | Responsibilities   |
+
+  @navigate_to_job_opening
+  Scenario Outline: Create Job Opening
+    When the user clicks on the "Job Opening" link in the side navigation
+    Then the Job Opening screen should be displayed
+    And the "Add Job Opening" button should be visible
+
+  Examples:
+    | action                                           |
+    | Click on the "Job Opening" link in the side navigation |
+
+  @open_job_opening_form
+  Scenario Outline: Create Job Opening
+    When I click on the Add Job Opening button
+    Then the Create New Job Opening form should be opened
+    And the Save and Cancel buttons should be displayed
+
+    Examples:
+      | title                | description                                                                 |
+      | Create Job Opening   | Verify that the recruiter can open the Create New Job Opening form.        |
+
+@valid-job-opening
+Scenario Outline: Create Job Opening
+  When I select a Job Role "<jobRole>"
+  And I select a Location "<location>"
+  And I enter Minimum Experience "<minExperience>"
+  And I enter Maximum Experience "<maxExperience>"
+  And I enter Qualification "<qualification>"
+  And I enter Short Job Description "<shortDescription>"
+  And I enter Responsibilities "<responsibilities>"
+  And I click on "Save"
+  Then the job opening should be saved successfully
+  And the job opening should be available in the Job Opening list
+
+  Examples:
+    | jobRole         | location   | minExperience | maxExperience | qualification         | shortDescription                      | responsibilities                                     |
+    | Software Engineer| New York  | 2             | 5             | Bachelor's Degree      | This is a short job description.     | 1. Develop software solutions. 2. Collaborate with team members. |
+
+  @valid-job-opening
+  Scenario Outline: Create Job Opening
+    Given the recruiter selects a Job Role
+    And the recruiter selects a Location
+    And the recruiter enters Minimum Experience as "<minimum_experience>"
+    And the recruiter leaves Maximum Experience blank
+    And the recruiter enters Qualification as "<qualification>"
+    When the recruiter clicks on "Save"
+    Then the job opening should be saved successfully
+    And the job opening should be available in the Job Opening list
+
+    Examples:
+      | minimum_experience | qualification      |
+      | 2                  | Bachelor's Degree   |
+
+  @valid-job-opening
+  Scenario Outline: Create Job Opening
+    When I select "<job_role>"
+    And I select "<location>"
+    And I enter "<min_experience>" as Minimum Experience
+    And I enter "<max_experience>" as Maximum Experience
+    And I select "<employment_type>" as Employment Type
+    And I click on "Save"
+    Then the job opening should be saved successfully
+    And the job opening should be available in the Job Opening list
+
+    Examples:
+      | job_role          | location   | min_experience | max_experience | employment_type |
+      | Software Engineer  | New York   | 2              | 5              | Full-time       |
+
+@valid-job-opening
+Scenario Outline: Create Job Opening with Valid Work Mode
+  Given the recruiter selects a Job Role "<job_role>"
+  And the recruiter selects a Location "<location>"
+  And the recruiter enters Minimum Experience "<min_experience>"
+  And the recruiter enters Maximum Experience "<max_experience>"
+  And the recruiter selects Work Mode "<work_mode>"
+  When the recruiter clicks on "Save"
+  Then the job opening should be saved successfully
+  And the job opening should be available in the Job Opening list
+
+  Examples:
+    | job_role          | location   | min_experience | max_experience | work_mode |
+    | Software Engineer  | New York   | 2              | 5              | Remote    |
+
+  @valid-job-opening
+  Scenario Outline: Create Job Opening with Valid Status
+    Given the recruiter selects "<job_role>"
+    And the recruiter selects "<location>"
+    And the recruiter enters "<min_experience>" as Minimum Experience
+    And the recruiter enters "<max_experience>" as Maximum Experience
+    And the recruiter selects "<status>"
+    When the recruiter clicks on "Save"
+    Then the job opening should be saved successfully
+    And the job opening should be available in the Job Opening list
+
+    Examples:
+      | job_role         | location    | min_experience | max_experience | status |
+      | Software Engineer | New York    | 2              | 5              | Open   |
+
+@valid_job_opening
+Scenario Outline: Create Job Opening with Valid Department
+  When I select the Job Role "<job_role>"
+  And I select the Location "<location>"
+  And I enter Minimum Experience "<min_experience>"
+  And I enter Maximum Experience "<max_experience>"
+  And I enter a valid Department "<department>"
+  And I click on "Save"
+  Then the job opening should be saved successfully
+  And the job opening should be available in the Job Opening list
+
+  Examples:
+    | job_role         | location   | min_experience | max_experience | department   |
+    | Software Engineer | New York   | 2              | 5              | Engineering   |
+
+  @create-job-opening
+  Scenario Outline: Create Job Opening
+    When the recruiter selects a Job Role as "<job_role>"
+    And the recruiter selects a Location as "<location>"
+    And the recruiter enters Minimum Experience as "<min_experience>"
+    And the recruiter enters Maximum Experience as "<max_experience>"
+    And the recruiter enters a valid Industry Type as "<industry_type>"
+    And the recruiter clicks on "Save"
+    Then the job opening should be saved successfully
+    And the job opening should be available in the Job Opening list
+
+    Examples:
+      | job_role         | location   | min_experience | max_experience | industry_type          |
+      | Software Engineer | New York   | 2              | 5              | Information Technology  |
+
+  @valid-job-opening
+  Scenario Outline: Create Job Opening with Valid Tags
+    When the recruiter selects a Job Role "<job_role>"
+    And the recruiter selects a Location "<location>"
+    And the recruiter enters Minimum Experience "<min_experience>"
+    And the recruiter enters Maximum Experience "<max_experience>"
+    And the recruiter enters valid Tags "<tags>"
+    And the recruiter clicks on "Save"
+    Then the job opening should be saved successfully
+    And the job opening should be available in the Job Opening list
+
+    Examples:
+      | job_role         | location    | min_experience | max_experience | tags                   |
+      | Software Engineer | New York    | 2              | 5              | Java, Python, SQL      |
+
+@valid-job-opening
+Scenario Outline: Create Job Opening
+  Given the user selects a Job Role "<job_role>"
+  And the user selects a Location "<location>"
+  And the user enters Minimum Experience "<min_experience>"
+  And the user enters Maximum Experience "<max_experience>"
+  And the user selects a valid Vendor "<vendor>"
+  When the user clicks on "Save"
+  Then the job opening should be saved successfully
+  And the job opening should be available in the Job Opening list
+
+  Examples:
+    | job_role         | location   | min_experience | max_experience | vendor        |
+    | Software Engineer | New York   | 2              | 5              | Valid Vendor  |
+
+  @missing_job_role
+  Scenario Outline: Create Job Opening with Missing Job Role
+    Given the user leaves the Job Role blank
+    And the user selects the Location "<location>"
+    And the user enters the Minimum Experience "<experience>"
+    When the user clicks on "Save"
+    Then an error message should be displayed indicating that Job Role is required
+    And the job opening should not be saved
+
+    Examples:
+      | location   | experience |
+      | New York   | 2          |
+
+  @invalid-experience
+  Scenario Outline: Create Job Opening with Invalid Experience Range
+    Given the user selects a Job Role "<job_role>"
+    And the user selects a Location "<location>"
+    And the user enters Minimum Experience as "<min_experience>"
+    And the user enters Maximum Experience as "<max_experience>"
+    When the user clicks on "Save"
+    Then an error message should be displayed indicating that Minimum Experience cannot be greater than Maximum Experience
+    And the job opening should not be saved
+
+    Examples:
+      | job_role         | location  | min_experience | max_experience |
+      | Software Engineer | New York  | 5 years        | 3 years        |
+
+  @invalid-employment-type
+  Scenario Outline: Create Job Opening with Invalid Employment Type
+    Given the recruiter selects a Job Role
+    And the recruiter selects a Location
+    And the recruiter enters Minimum Experience
+    And the recruiter enters Maximum Experience
+    And the recruiter selects an invalid Employment Type "<employmentType>"
+    When the recruiter clicks on "Save"
+    Then an error message should be displayed indicating that the selected Employment Type is invalid
+    And the job opening should not be saved
+
+    Examples:
+      | employmentType |
+      | Unknown        |
+
+  @invalid-workmode
+  Scenario Outline: Create Job Opening with Invalid Work Mode
+    Given the recruiter selects a Job Role "<job_role>"
+    And the recruiter selects a Location "<location>"
+    And the recruiter enters Minimum Experience "<min_experience>"
+    And the recruiter enters Maximum Experience "<max_experience>"
+    And the recruiter selects an invalid Work Mode "<work_mode>"
+    When the recruiter clicks on "Save"
+    Then an error message should be displayed indicating that the selected Work Mode is invalid
+    And the job opening should not be saved
+
+    Examples:
+      | job_role          | location    | min_experience | max_experience | work_mode |
+      | Software Engineer  | New York    | 2              | 5              | Unknown   |
+
+  @invalid-status
+  Scenario Outline: Create Job Opening with Invalid Status
+    When I select a Job Role "<jobRole>"
+    And I select a Location "<location>"
+    And I enter Minimum Experience "<minExperience>"
+    And I enter Maximum Experience "<maxExperience>"
+    And I select an invalid Status "<status>"
+    And I click on "Save"
+    Then an error message should be displayed indicating that the selected Status is invalid
+    And the job opening should not be saved
+
+    Examples:
+      | jobRole          | location    | minExperience | maxExperience | status   |
+      | Software Engineer | New York    | 2             | 5             | Unknown  |
+
+  @department_blank_error
+  Scenario Outline: Create Job Opening with Department Field Blank
+    When the user selects a Job Role
+    And the user selects a Location
+    And the user enters Minimum Experience
+    And the user enters Maximum Experience
+    And the user leaves the Department blank
+    And the user clicks on Save
+    Then an error message should be displayed indicating that Department is required
+    And the job opening should not be saved
+
+    Examples:
+      | job_role         | location        | min_experience | max_experience |
+      | Software Engineer | New York        | 2              | 5              |
+
+  @industry_type_required
+  Scenario Outline: Create Job Opening with Industry Type Left Blank
+    Given the user selects a Job Role
+    And the user selects a Location
+    And the user enters Minimum Experience
+    And the user enters Maximum Experience
+    And the user leaves Industry Type blank
+    When the user clicks on "Save"
+    Then an error message should be displayed indicating that Industry Type is required
+    And the job opening should not be saved
+
+    Examples:
+      | Job Role        | Location       | Minimum Experience | Maximum Experience |
+      | Software Engineer| New York       | 3 years           | 5 years           |
+
+  @invalid-tags
+  Scenario Outline: Create Job Opening with Invalid Tags
+    Given the recruiter selects a Job Role
+    And the recruiter selects a Location
+    And the recruiter enters Minimum Experience
+    And the recruiter enters Maximum Experience
+    And the recruiter enters invalid Tags
+    When the recruiter clicks on "Save"
+    Then an error message should be displayed indicating that the Tags are invalid
+    And the job opening should not be saved
+
+    Examples:
+      | Job Role       | Location      | Minimum Experience | Maximum Experience | Tags          |
+      | <Job Role>     | <Location>    | <Minimum Experience> | <Maximum Experience> | <Tags>       |
+      | " "            | " "           | "1"                | "10"              | "!@#$%^&*()"  |
+
+  @invalid-vendor
+  Scenario Outline: Create Job Opening with Invalid Vendor
+    Given the recruiter selects a Job Role
+    And the recruiter selects a Location
+    And the recruiter enters "<minimum_experience>" as Minimum Experience
+    And the recruiter enters "<maximum_experience>" as Maximum Experience
+    And the recruiter selects an invalid Vendor "<vendor>"
+    When the recruiter clicks on "Save"
+    Then an error message should be displayed indicating that the selected Vendor is invalid
+    And the job opening should not be saved
+
+    Examples:
+      | minimum_experience | maximum_experience | vendor   |
+      | -1                 | 100                | Unknown  |
+
+@max-character-job-opening
+Scenario Outline: Create Job Opening with Maximum Character Limits
+  When the user selects a Job Role "<job_role>"
+  And the user selects a Location "<location>"
+  And the user enters Minimum Experience "<minimum_experience>"
+  And the user enters Maximum Experience "<maximum_experience>"
+  And the user enters Qualification "<qualification>"
+  And the user enters Short Job Description "<short_description>"
+  And the user enters Responsibilities "<responsibilities>"
+  And the user clicks on "Save"
+  Then the job opening should be saved successfully
+  And the job opening should be available in the Job Opening list
+
+  Examples:
+    | job_role                       | location                      | minimum_experience | maximum_experience | qualification                   | short_description              | responsibilities               |
+    | a * 100                        | a * 100                       | 2 years            | 5 years           | a * 100                         | a * 100                        | a * 100                        |
+
+  @valid-job-opening
+  Scenario Outline: Create Job Opening with Minimum Character Limits
+    When I select a Job Role "<job_role>"
+    And I select a Location "<location>"
+    And I enter Minimum Experience "<minimum_experience>"
+    And I enter Maximum Experience "<maximum_experience>"
+    And I enter Qualification "<qualification>"
+    And I enter Short Job Description "<short_job_description>"
+    And I enter Responsibilities "<responsibilities>"
+    And I click on "Save"
+    Then the job opening should be saved successfully
+    And the job opening should be available in the Job Opening list
+
+    Examples:
+      | job_role  | location   | minimum_experience | maximum_experience | qualification | short_job_description | responsibilities  |
+      | Developer | New York   | 1                  | 2                  | Bachelor's     | Short description     | Responsibilities   |
