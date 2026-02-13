@@ -13,13 +13,13 @@ package com.project.runner;
     public class TestRunner extends AbstractTestNGCucumberTests {
         
         @Test(priority = 0)
-        public void runLoginscreenforrecruitersPos() {
-            runCucumberFeature("src/test/resources/com/tap-dap22/features/LoginScreenForRecruiters_pos.feature");
+        public void runLoginscreenforrecruitersNeg() {
+            runCucumberFeature("src/test/resources/com/tap-dap22/features/LoginScreenForRecruiters_neg.feature");
         }
     
     @Test(priority = 1)
-        public void runLoginscreenforrecruitersNeg() {
-            runCucumberFeature("src/test/resources/com/tap-dap22/features/LoginScreenForRecruiters_neg.feature");
+        public void runLoginscreenforrecruitersPos() {
+            runCucumberFeature("src/test/resources/com/tap-dap22/features/LoginScreenForRecruiters_pos.feature");
         }
     
             
