@@ -1,4 +1,4 @@
-package com.project.utils;
+package com.backend.utils;
 
 import java.time.Duration;
 

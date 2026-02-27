@@ -1,12 +1,12 @@
-package com.project.hook;
+package com.backend.hook;
 
 import java.util.Properties;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
-import com.project.driverfactory.DriverFactory;
-import com.project.utils.CommonUtils;
-import com.project.utils.ConfigReader;
+import com.backend.driverfactory.DriverFactory;
+import com.backend.utils.CommonUtils;
+import com.backend.utils.ConfigReader;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
